@@ -1,10 +1,13 @@
-package com.victor.errController;
+package com.victor.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.victor.model.MyDataException;
 import com.victor.model.MyPageException;
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 统一异常处理
@@ -15,7 +18,7 @@ import com.victor.model.MyPageException;
  *
  */
 @RestController
-public class helloWorld {
+public class errController {
 
 	/**
 	 * 1.默认的异常处理 界面显示（http://localhost:8080/hello）
@@ -24,6 +27,8 @@ public class helloWorld {
 	 * @return
 	 * @throws Exception
 	 */
+	@ApiOperation(value="返回json", notes="json格式的异常统一处理")
+    @ApiImplicitParam(name = "json", value = "无需输入参数", required = true, dataType = "demo1")
 	@RequestMapping("data/hello")
 	public String hello1() throws Exception {
 	    throw new MyDataException("发生错误");
@@ -36,6 +41,8 @@ public class helloWorld {
 	 * @return
 	 * @throws Exception
 	 */	
+	@ApiOperation(value="返回json", notes="页面的异常统一处理")
+    @ApiImplicitParam(name = "json", value = "无需输入参数", required = true, dataType = "demo2")
 	@RequestMapping("page/hello")
 	public String hello2() throws Exception {
 	    throw new MyPageException("发生错误");
