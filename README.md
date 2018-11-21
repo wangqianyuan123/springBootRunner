@@ -77,3 +77,8 @@ The service DemoApplication to end.
 5.通过控制台的输出我们发现，添加 @Order 注解的实现类最先执行，并且@Order()里面的值越小启动越早。
 
 CommandLineRunner 接口的 Component 会在所有 Spring Beans 都初始化之后，SpringApplication.run() 之前执行，非常适合在应用程序启动之初进行一些数据初始化的工作。
+2018/11/21
+task模块中 提交 初始化资源的小技巧 CommandLineRunner @Order指定初始化的顺序
+2018/11/21
+测试模块中  提交邮件发送  并用 thymeleaf 设置邮件动态模板
+
