@@ -85,3 +85,6 @@ task模块中 提交 初始化资源的小技巧 CommandLineRunner @Order指定�
 7.2018/11/21
 测试模块中  提交邮件发送  并用 thymeleaf 设置邮件动态模板
 
+8.2018/11/21
+errController模块中  提交统一异常处理  （错误数据json 和页面err.html）
+
