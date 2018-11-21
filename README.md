@@ -79,8 +79,9 @@ The service DemoApplication to end.
 CommandLineRunner 接口的 Component 会在所有 Spring Beans 都初始化之后，SpringApplication.run() 之前执行，非常适合在应用程序启动之初进行一些数据初始化的工作。
 
 
-2018/11/21
+6.2018/11/21
 task模块中 提交 初始化资源的小技巧 CommandLineRunner @Order指定初始化的顺序
-2018/11/21
+
+7.2018/11/21
 测试模块中  提交邮件发送  并用 thymeleaf 设置邮件动态模板
 
