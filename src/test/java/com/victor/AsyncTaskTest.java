@@ -23,7 +23,7 @@ public class AsyncTaskTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void test1() throws Exception {
+	public void test() throws Exception {
 		asyncTask.doTaskOne();
 		asyncTask.doTaskTwo();
 		asyncTask.doTaskThree();
@@ -45,7 +45,7 @@ public class AsyncTaskTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void test2() throws Exception {
+	public void test1() throws Exception {
 		asyncTask.doTaskOne();
 		asyncTask.doTaskTwo();
 		asyncTask.doTaskThree();
@@ -59,13 +59,13 @@ public class AsyncTaskTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void test() throws Exception {
+	public void test2() throws Exception {
 
 		long start = System.currentTimeMillis();
 
-		Future<String> task1 = asyncTask.doTaskOne1();
+		Future<String> task1 = asyncTask.doTaskOne2();
 		Future<String> task2 = asyncTask.doTaskTwo2();
-		Future<String> task3 = asyncTask.doTaskThree3();
+		Future<String> task3 = asyncTask.doTaskThree2();
 
 		while(true) {
 			if(task1.isDone() && task2.isDone() && task3.isDone()) {
@@ -81,6 +81,18 @@ public class AsyncTaskTest {
 
 	}
 	
+	/**
+	 * 线程池 执行异步
+	 * @throws Exception
+	 */
+	 @Test
+	 public void test3() throws Exception {
+
+		 asyncTask.doTaskOne3();
+		 asyncTask.doTaskTwo3();
+		 asyncTask.doTaskThree3();
+	     Thread.currentThread().join();
+	    }
 
 	
 	
