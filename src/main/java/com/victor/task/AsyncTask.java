@@ -48,7 +48,7 @@ public class AsyncTask {
 		Thread.sleep(random.nextInt(10000));
 		long end = System.currentTimeMillis();
 		System.out.println("完成任务一，耗时：" + (end - start) + "毫秒");
-		return new AsyncResult<>("任务一完成");
+		return new AsyncResult<>("任务一按时完成");
 	}
 	
 	 @Async("taskExecutor")

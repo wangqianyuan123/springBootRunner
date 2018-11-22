@@ -1,9 +1,12 @@
 package com.victor;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -13,7 +16,7 @@ import com.victor.task.AsyncTask;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AsyncTaskTest {
-
+	private static Logger log = LoggerFactory.getLogger(AsyncTaskTest.class);
 	@Autowired
 	private AsyncTask asyncTask;
 
@@ -116,4 +119,18 @@ public class AsyncTaskTest {
 	        }
 	    }
 	
+	  
+	  /**
+	   * Future是对于具体的Runnable或者Callable任务的执行结果进行取消、查询是否完成、获取结果的接口。
+	   * 必要时可以通过get方法获取执行结果，该方法会阻塞直到任务返回结果。
+	   * @throws Exception
+	   */
+	  @Test
+	  public void test5() throws Exception {
+	        Future<String> futureResult = asyncTask.doTaskOne2();
+	        //通过执行这个测试我们可以观察到执行时间超过5000豪秒的时候，这里会抛出超时异常，
+	          //该执行线程就能够因执行超时而释放回线程池，不至于一直阻塞而占用资源。
+	        String result = futureResult.get(5000, TimeUnit.MILLISECONDS);
+	        log.info(result);
+	    }
 }
