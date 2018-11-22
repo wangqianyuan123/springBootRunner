@@ -115,3 +115,6 @@ Spring boot中Redis的使用
 16.2018/11/22
 ThreadPoolTaskScheduler线程池的优雅关闭
 
+17.2018/11/22
+Spring Boot中使用AOP统一处理Web请求日志 (数据埋点 ，统一过滤)
+
