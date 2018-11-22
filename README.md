@@ -96,3 +96,6 @@ springboot 集成mybatis 并搭建多数据源架构
 
 11.2018/11/22
 springboot 日志切割
+
+12.2018/11/22
+insert 注解和xml 形式

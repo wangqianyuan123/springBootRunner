@@ -1,5 +1,6 @@
 package com.victor.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +35,13 @@ public class userController {
 	 @ResponseBody
      public List<UserDto> user() {
          return apiMasterDao.findUserList();
+     }
+	 
+	 @ApiOperation(value="新增实体", notes="json格式的异常统一处理")
+	 @RequestMapping(value="/insertUser",method = RequestMethod.POST)
+	 @ResponseBody
+     public int insertUser(@RequestBody UserDto userDto) {
+         return apiMasterDao.insertData(userDto);
+//		 return apiMasterDao.insertUser(userDto);
      }
 }

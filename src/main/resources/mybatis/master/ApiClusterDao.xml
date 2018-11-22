@@ -2,6 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.victor.dao.master.ApiMasterDao">
  
- 
+ 	<insert id="insertData" parameterType="com.victor.model.UserDto">
+ 	   INSERT   springboot.userInfo(ID,USER_NAME, BIRTHDAY)
+VALUES
+	(
+	    #{id},
+		#{userName},
+		#{birthday}
+	)
+ 	</insert>
  
 </mapper>

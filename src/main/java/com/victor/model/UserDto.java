@@ -1,12 +1,13 @@
 package com.victor.model;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class UserDto {
 
 	private int id;
     private String userName;
-    private LocalDate  birthday;
+    private Date  birthday;
     
 	public int getId() {
 		return id;
@@ -20,12 +21,13 @@ public class UserDto {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public LocalDate getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(LocalDate birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+
 	
 
 	
