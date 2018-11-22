@@ -119,6 +119,13 @@
 </dependency>
 
   <!--  整合mysql 依赖结束 -->
+  
+  <!-- redis -->
+  		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
