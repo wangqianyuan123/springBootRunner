@@ -19,8 +19,8 @@ import org.springframework.stereotype.Component;
 public class ScheduledTasks {
 	 private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");  
 	// @Scheduled(cron="*/5 * * * * *") 通过cron表达式定义规则
-	    @Scheduled(fixedRate = 5000)
-	    public void reportCurrentTime() {
-	        System.out.println("现在时间：" + dateFormat.format(new Date()));
-	    }
+//	    @Scheduled(fixedRate = 5000)
+//	    public void reportCurrentTime() {
+//	        System.out.println("现在时间：" + dateFormat.format(new Date()));
+//	    }
 }
