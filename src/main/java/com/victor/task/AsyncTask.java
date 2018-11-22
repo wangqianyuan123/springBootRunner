@@ -3,13 +3,15 @@ package com.victor.task;
 import java.util.Random;
 import java.util.concurrent.Future;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Component;
 
-import com.victor.config.MBMasterDataSourceConfig;
 
 /**
  * 
@@ -23,6 +25,9 @@ import com.victor.config.MBMasterDataSourceConfig;
 public class AsyncTask {
 	private static Logger log = LoggerFactory.getLogger(AsyncTask.class);
 	
+    @Resource
+    RedisTemplate<String, Object> redisTemplate;
+    
 	public static Random random =new Random();
 
 	
@@ -55,6 +60,16 @@ public class AsyncTask {
 	        log.info("完成任务一，耗时：" + (end - start) + "毫秒");
 	    }
 	 
+	 @Async("taskExecutor")
+	 public void doTaskOne4() throws Exception {
+	        log.info("开始做任务一");
+	        long start = System.currentTimeMillis();
+	        log.info(redisTemplate.randomKey());
+	        long end = System.currentTimeMillis();
+	        log.info("完成任务一，耗时：" + (end - start) + "毫秒");
+	    }
+	 
+	 
 	 
 	@Async
     public void doTaskTwo() throws Exception {
@@ -85,6 +100,14 @@ public class AsyncTask {
         log.info("完成任务二，耗时：" + (end - start) + "毫秒");
     }
     
+    @Async("taskExecutor")
+    public void doTaskTwo4() throws Exception {
+        log.info("开始做任务二");
+        long start = System.currentTimeMillis();
+        log.info(redisTemplate.randomKey());
+        long end = System.currentTimeMillis();
+        log.info("完成任务二，耗时：" + (end - start) + "毫秒");
+    }
     
 	@Async
     public void doTaskThree() throws Exception {
@@ -111,6 +134,15 @@ public class AsyncTask {
         log.info("开始做任务三");
         long start = System.currentTimeMillis();
         Thread.sleep(random.nextInt(10000));
+        long end = System.currentTimeMillis();
+        log.info("完成任务三，耗时：" + (end - start) + "毫秒");
+    }
+    
+    @Async("taskExecutor")
+    public void doTaskThree4() throws Exception {
+        log.info("开始做任务三");
+        long start = System.currentTimeMillis();
+        log.info(redisTemplate.randomKey());
         long end = System.currentTimeMillis();
         log.info("完成任务三，耗时：" + (end - start) + "毫秒");
     }

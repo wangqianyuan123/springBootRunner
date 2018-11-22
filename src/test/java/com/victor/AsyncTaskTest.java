@@ -82,18 +82,38 @@ public class AsyncTaskTest {
 	}
 	
 	/**
-	 * 线程池 执行异步
+	 * 线程池 执行异步  指定 线程池资源 taskExecutor
 	 * @throws Exception
 	 */
 	 @Test
 	 public void test3() throws Exception {
-
 		 asyncTask.doTaskOne3();
 		 asyncTask.doTaskTwo3();
 		 asyncTask.doTaskThree3();
 	     Thread.currentThread().join();
 	    }
 
-	
+	 
+	 /**
+	  * 测试
+	  * Redis连接池先销毁了，异步任务还要要访问Redis的操作
+	  * 1.配置 setWaitForTasksToCompleteOnShutdown 的作用
+	  * 确保 异步任务的销毁就会先于Redis线程池的销毁
+	  * 2.setAwaitTerminationSeconds(60)
+	  * 设置线程池中任务的等待时间，如果超过这个时候还没有销毁就强制销毁
+	  * @throws Exception
+	  */
+	  @Test
+	  public void test4() throws Exception {
+
+	        for (int i = 0; i < 10000; i++) {
+	        	asyncTask.doTaskOne4();
+	        	asyncTask.doTaskTwo4();
+	        	asyncTask.doTaskThree4();
+	            if (i == 9999) {
+	                System.exit(0);
+	            }
+	        }
+	    }
 	
 }

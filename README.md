@@ -111,3 +111,7 @@ Spring Boot中使用@Async实现异步调用  并 自定义线程池
 
 16.2018/11/22
 Spring boot中Redis的使用
+
+16.2018/11/22
+ThreadPoolTaskScheduler线程池的优雅关闭
+
