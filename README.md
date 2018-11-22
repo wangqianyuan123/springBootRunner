@@ -93,3 +93,6 @@ errController模块中  提交统一异常处理  （错误数据json 和页面e
 
 10.2018/11/22
 springboot 集成mybatis 并搭建多数据源架构
+
+11.2018/11/22
+springboot 日志切割
