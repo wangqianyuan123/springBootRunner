@@ -1,5 +1,6 @@
 package com.victor;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,4 +12,5 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 		System.err.println("The service DemoApplication to end.");
 	}
+
 }

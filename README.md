@@ -90,3 +90,6 @@ errController模块中  提交统一异常处理  （错误数据json 和页面e
 
 9.2018/11/21
 配置Swagger2 在线文档  并设置密码
+
+10.2018/11/22
+springboot 集成mybatis 并搭建多数据源架构
