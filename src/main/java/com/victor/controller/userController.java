@@ -41,7 +41,7 @@ public class userController {
 	 @RequestMapping(value="/insertUser",method = RequestMethod.POST)
 	 @ResponseBody
      public int insertUser(@RequestBody UserDto userDto) {
-//         return apiMasterDao.insertData(userDto);
-		 return apiMasterDao.insertUser(userDto);
+         return apiMasterDao.insertData(userDto);
+//		 return apiMasterDao.insertUser(userDto);
      }
 }

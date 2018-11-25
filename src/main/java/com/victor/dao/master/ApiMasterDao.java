@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import com.victor.model.UserDto;
 
 
-
+@Mapper
 public interface ApiMasterDao {
 
 	// 获取 key值对应sql
