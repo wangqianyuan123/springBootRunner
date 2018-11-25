@@ -21,6 +21,7 @@ public class DemoApplication {
 		System.err.println("The service DemoApplication to start.");
 		SpringApplication.run(DemoApplication.class, args);
 		System.err.println("The service DemoApplication to end.");
+
 	}
 
 }
