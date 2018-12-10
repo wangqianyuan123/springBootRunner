@@ -32,8 +32,9 @@ public class AsyncTask {
 
 	
 	@Async
-    public void doTaskOne() throws Exception {
+    public void doTaskOne(String a) throws Exception {
         System.out.println("开始做任务一");
+        System.out.println(a);
         long start = System.currentTimeMillis();
         Thread.sleep(random.nextInt(10000));
         long end = System.currentTimeMillis();
