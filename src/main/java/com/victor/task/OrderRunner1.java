@@ -10,7 +10,14 @@ public class OrderRunner1 implements CommandLineRunner  {
 
 	@Override
 	public void run(String... args) throws Exception {
-		   System.out.println("OrderRunner1 初始化开始");	
+		System.out.println("OrderRunner1 初始化开始");	
+		 new Thread(new Thread()).start();
+	        try {
+	             Thread.sleep(1);
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		   System.out.println("OrderRunner1 初始化结束！");	
 	}
 
 }
