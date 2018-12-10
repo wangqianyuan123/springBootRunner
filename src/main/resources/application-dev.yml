@@ -21,9 +21,11 @@ spring:
                         enable: true
                         required: true
         username: 896943899@qq.com
+    profiles:
+        active: dev
     redis:
         cluster:
-            nodes: XXX,YYY
+            nodes: 192.168.129.174:16379 , 192.168.129.175:16379 ,192.168.129.176:16379
     security:
         user:
             name: admin
