@@ -27,9 +27,12 @@ public class AsyncTaskTest {
 	 */
 	@Test
 	public void test() throws Exception {
-		asyncTask.doTaskOne();
+		System.out.println("开始！");
+		String a="参数1";
+		asyncTask.doTaskOne(a);
 		asyncTask.doTaskTwo();
 		asyncTask.doTaskThree();
+		System.out.println("结束！");
 	}
 	
 	
@@ -49,7 +52,7 @@ public class AsyncTaskTest {
 	 */
 	@Test
 	public void test1() throws Exception {
-		asyncTask.doTaskOne();
+		asyncTask.doTaskOne("1");
 		asyncTask.doTaskTwo();
 		asyncTask.doTaskThree();
 	}

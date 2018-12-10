@@ -20,10 +20,8 @@ public class RedisTests {
 	@Test
 	public void test() throws Exception {
 
-		// 保存字符串
-		redisTemplate.opsForValue().set("aaa", "小李子");
-		System.out.println(redisTemplate.opsForValue().get("aaa"));
-		Assert.assertEquals("小李子", redisTemplate.opsForValue().get("aaa"));
+//		System.out.println(redisTemplate.delete("RELATION_1178_1.1"));
+		System.out.println(redisTemplate.delete("tasklock"));
 
     }
 }
