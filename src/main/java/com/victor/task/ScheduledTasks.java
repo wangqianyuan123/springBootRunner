@@ -49,6 +49,7 @@ public class ScheduledTasks {
 		/**
 		 * 每15秒执行一次
 		 * 分布式环境下的定时任务方案
+		 * setnx / del / expire
 		 * @throws InterruptedException
 		 */
 	    @Scheduled(cron = "0/15 * * * * ?")
