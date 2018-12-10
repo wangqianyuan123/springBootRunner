@@ -1,0 +1,30 @@
+server:
+    port: 8081
+spring:
+    application:
+        name: SpringBootRunner
+    datasource:
+        master:
+            driverClassName: com.mysql.jdbc.Driver
+            masterMapperLocations: classpath:mybatis/master/*.xml
+            password: WQY1234
+            url: jdbc:mysql://localhost:3306/springboot
+            username: root
+    mail:
+        host: smtp.qq.com
+        password: 'IMAP/SMTP服务独立密码 用于第三方登录邮箱 '
+        properties:
+            mail:
+                smtp:
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true
+        username: 896943899@qq.com
+    redis:
+        cluster:
+            nodes: XXX,YYY
+    security:
+        user:
+            name: admin
+            password: admin
