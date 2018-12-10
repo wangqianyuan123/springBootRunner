@@ -118,3 +118,5 @@ ThreadPoolTaskScheduler线程池的优雅关闭
 17.2018/11/22
 Spring Boot中使用AOP统一处理Web请求日志 (数据埋点 ，统一过滤)
 
+18.2018/12/10
+策略模式代替if else 程序结构更灵活，具有更好的维护性和扩展性。
