@@ -2,6 +2,7 @@ package com.victor.controller;
 
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,8 @@ public class userController {
 	 @ApiOperation(value="返回实体列表", notes="json格式的异常统一处理")
 	 @RequestMapping(value="/getUserList",method = RequestMethod.POST)
 	 @ResponseBody
-     public List<UserDto> user() {
+     public List<UserDto> user() throws InterruptedException {
+			TimeUnit.SECONDS.sleep(2);
          return apiMasterDao.findUserList();
      }
 	 

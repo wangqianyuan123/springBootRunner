@@ -130,3 +130,4 @@ Spring Boot中使用AOP统一处理Web请求日志 (数据埋点 ，统一过滤
 20.2018/12/10
 并发测试setIfAbsent
    
+21.利用aop 界面 对接口精准 设置超时时间hystrix   getFallback必须和接口返回类型一致
