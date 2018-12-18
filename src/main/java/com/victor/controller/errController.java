@@ -40,7 +40,7 @@ public class errController {
 	public String hello1(String datakey) throws Exception {
 //	    throw new MyDataException("发生错误");
 		//RELATION_M1168
-		System.out.println(redisTemplate.delete(datakey));
+//		System.out.println(redisTemplate.delete(datakey));
 		return "123";
 
 	}

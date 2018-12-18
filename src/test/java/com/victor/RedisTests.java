@@ -19,9 +19,7 @@ public class RedisTests {
 	
 	@Test
 	public void test() throws Exception {
-
-//		System.out.println(redisTemplate.delete("RELATION_1178_1.1"));
-		System.out.println(redisTemplate.delete("tasklock"));
+		redisTemplate.delete("RELATION_1178_1.1");
 
     }
 }
