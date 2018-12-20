@@ -76,7 +76,8 @@ public class WebLogHeadAspect {
 			startTime.set(System.currentTimeMillis());
 			uuid.set(UUID.randomUUID().toString().replace("-", "")+"");
 		} else {
-			
+			startTime.set(System.currentTimeMillis());
+			uuid.set(UUID.randomUUID().toString().replace("-", "")+"");
 		}
 		log.info(PRE_TAG + "(classMethod)  : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
 		log.info(PRE_TAG + "(RequestBefore)  startTime: " + startTime.get());
