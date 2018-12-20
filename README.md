@@ -133,3 +133,7 @@ Spring Boot中使用AOP统一处理Web请求日志 (数据埋点 ，统一过滤
 21.利用aop 界面 对接口精准 设置超时时间hystrix   getFallback必须和接口返回类型一致
 
 22.spring-boot-starter-data-redis 依赖下使用redis的模糊查询
+
+23.2018/12/20
+动态加载 数据源 参考 https://blog.csdn.net/cs373616511/article/details/82827635
+
