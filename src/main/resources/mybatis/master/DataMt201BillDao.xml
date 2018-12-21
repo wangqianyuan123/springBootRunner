@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easipass.api.dao.clusterS.DataMt201BillDao">
+
+    <resultMap id="BaseResultMap" type="com.easipass.api.model.dto.dra33dto.Mt2101BillInfo">
+        <!-- <id column="appCode" property="appCode"/> -->
+        <result column="vslName" property="vslName"/>
+        <result column="voyage" property="voyage"/>
+        <result column="billNo" property="billNo"/>
+        <result column="loadPortCode" property="loadPortCode"/>
+      <result column="createTime" property="createTime"/>
+        <result column="cube" property="cube"/>
+         <result column="pkgTotalNo" property="pkgTotalNo"/>
+        <result column="totalGrossWeight" property="totalGrossWeight"/>
+        <result column="pkgTypeCode" property="pkgTypeCode"/>
+        <result column="messageId" property="messageId"/>
+          <result column="imoNo" property="imoNo"/>
+        <collection property="mt2101BillRspInfos" ofType="com.easipass.api.model.dto.dra33dto.Mt2101BillRspInfo"
+                    javaType="java.util.ArrayList">
+            <id column="rspCode" property="rspCode"/>
+            <!--<result column="marks" jdbcType="VARCHAR" property="marks"/>-->
+            <result column="rspText" property="rspText"/>
+        </collection>
+    </resultMap>
+
+    <select id="getExPreNewBillInfo" parameterType="com.easipass.api.model.dto.dra33dto.Mt2101BillInfo" resultMap="BaseResultMap">
+
+        SELECT
+        *
+        FROM
+        (
+        SELECT
+        A .*, ROWNUM rn
+        FROM
+        (
+SELECT
+  L.VESSEL AS "vslName",
+  L.VOYAGE AS "voyage",
+  L.MASTER_BLNO AS "billNo",
+  L.LOAD_PORT_CODE AS "loadPortCode",
+  TO_CHAR(L.CREATE_TIME,'YYYY/MM/DD HH24:MI:SS') AS "createTime",
+  L.CUBE AS "cube",
+  L.PKG_TOTAL_NO AS "pkgTotalNo",
+  L.TOTAL_GROSS_WEIGHT AS "totalGrossWeight",
+  L.PKG_TYPE_CODE AS "pkgTypeCode",
+  L.MESSAGEID AS "messageId",
+  L.IMO_NO AS "imoNo",
+  P.RSP_CODE AS "rspCode",
+  P.RSP_TEXT AS "rspText"
+  FROM ODS.MT2101_BILL L
+Left JOIN ODS.MT2101_BILL_RSP P ON P.MESSAGEID = L.MESSAGEID
+AND P.IMO_NO = L.IMO_NO AND P.VOYAGE = L.VOYAGE AND P.MASTER_BLNO = L.MASTER_BLNO
+AND L.ISCURRENT = 1 AND L.ISDELETED = 0
+AND P.ISCURRENT = 1 AND P.ISDELETED = 0
+  AND L.MASTER_BLNO =#{billNo}
+        <if test="vslName != null and vslName != ''">
+              AND L.VESSEL=#{vslName}
+        </if>
+        <if test="voyage != null and voyage != ''">
+                AND L.VOYAGE =#{voyage}
+        </if>
+        ) A
+        WHERE ROWNUM &lt;= #{end}
+        ) H WHERE rn &gt;= #{start}
+    </select>
+
+    <select id="getCountExPreNewBill" parameterType="com.easipass.api.model.dto.dra33dto.Mt2101BillInfo"  resultType="Integer">
+SELECT
+Count(*)
+FROM ODS.MT2101_BILL L
+Left JOIN ODS.MT2101_BILL_RSP P ON P.MESSAGEID = L.MESSAGEID
+AND P.IMO_NO = L.IMO_NO AND P.VOYAGE = L.VOYAGE AND P.MASTER_BLNO = L.MASTER_BLNO
+AND L.ISCURRENT = 1 AND L.ISDELETED = 0
+AND P.ISCURRENT = 1 AND P.ISDELETED = 0
+  AND L.MASTER_BLNO =#{billNo}
+        <if test="vslName != null and vslName != ''">
+              AND L.VESSEL=#{vslName}
+        </if>
+        <if test="voyage != null and voyage != ''">
+                AND L.VOYAGE =#{voyage}
+        </if>
+    </select>
+
+ <select id="getMt2101BlcgList" parameterType="com.easipass.api.model.dto.dra33dto.Mt2101Request" resultType="java.util.Map">
+  select
+         G.MARKS AS "marks",
+  G.CARGO_DESC AS "cargoDesc"
+  FROM ODS.MT2101_BILL L
+INNER JOIN ODS.MT2101_BLCG G ON G.MESSAGEID = L.MESSAGEID
+AND G.IMO_NO = L.IMO_NO AND G.VOYAGE = L.VOYAGE AND G.MASTER_BLNO = L.MASTER_BLNO
+where
+ L.ISCURRENT = 1 AND L.ISDELETED = 0
+  AND G.ISCURRENT = 1 AND G.ISDELETED = 0
+  AND G.MESSAGEID=#{messageId}
+  AND G.IMO_NO=#{imoNo}
+  AND G.VOYAGE=#{voyage}
+  AND G.MASTER_BLNO=#{billNo}
+    </select>
+
+ <select id="getMt2101BlctnrList" parameterType="com.easipass.api.model.dto.dra33dto.Mt2101Request" resultType="java.util.Map">
+select
+  R.CTN_NO AS "ctnrNo",
+  R.SEAL_INFO AS "sealInfo",
+  R.SUPPLIER_TYPE_CODE AS "supplierTypeCode",
+  R.CTN_STATUS AS "ctnStatus"
+    FROM ODS.MT2101_BILL L
+INNER JOIN ODS.MT2101_BLCTNR R ON R.MESSAGEID = L.MESSAGEID
+AND R.IMO_NO = L.IMO_NO AND R.VOYAGE = L.VOYAGE AND R.MASTER_BLNO = L.MASTER_BLNO
+where
+ L.ISCURRENT = 1 AND L.ISDELETED = 0
+AND R.ISCURRENT = 1 AND R.ISDELETED = 0
+AND R.MESSAGEID=#{messageId}
+AND R.IMO_NO=#{imoNo}
+AND R.VOYAGE=#{voyage}
+AND R.MASTER_BLNO=#{billNo}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

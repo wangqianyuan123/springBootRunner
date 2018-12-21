@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 全局参数  map参数null值不丢弃-->
+<settings>
+<setting name="callSettersOnNulls" value="true" />
+</settings>
+
+
+</configuration>

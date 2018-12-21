@@ -10,6 +10,21 @@ spring:
             password: WQY1234
             url: jdbc:mysql://localhost:3306/springboot
             username: root
+    druid:
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      minIdle: 5
+      validationQuery: SELECT 1 FROM DUAL
+      initialSize: 5
+      maxWait: 60000
+      filters: stat,wall
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      testWhileIdle: true
+      testOnBorrow: false
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      testOnReturn: false
+      maxActive: 20            
     mail:
         host: smtp.qq.com
         password: 'IMAP/SMTP服务独立密码 用于第三方登录邮箱 '
@@ -21,12 +36,13 @@ spring:
                         enable: true
                         required: true
         username: 896943899@qq.com
-    profiles:
-        active: dev
     redis:
         cluster:
             nodes: 192.168.129.174:16379 , 192.168.129.175:16379 ,192.168.129.176:16379
-    security:
-        user:
-            name: admin
-            password: admin
+#    security:
+#        user:
+#            name: admin
+#            password: admin
+api:
+    application:
+        systemCode: eir
