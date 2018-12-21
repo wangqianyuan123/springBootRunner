@@ -39,6 +39,14 @@ public class userController {
          return apiMasterDao.findUserList();
      }
 	 
+	 @ApiOperation(value="返回实体列表", notes="json格式的异常统一处理")
+	 @RequestMapping(value="/getUserList2",method = RequestMethod.GET)
+	 @ResponseBody
+     public List<UserDto> user2() throws InterruptedException {
+//			TimeUnit.SECONDS.sleep(2);
+         return apiMasterDao.findUserList();
+     }
+	 
 	 @ApiOperation(value="新增实体", notes="json格式的异常统一处理")
 	 @RequestMapping(value="/insertUser",method = RequestMethod.POST)
 	 @ResponseBody

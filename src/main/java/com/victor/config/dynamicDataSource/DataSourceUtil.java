@@ -107,7 +107,7 @@ public class DataSourceUtil {
                     druidDataSource.setMaxActive(dataSourceInfo.getDbMaxProcess());
                     druidDataSource.setMinIdle(dataSourceInfo.getDbMinProcess());
                     //添加数据源到map
-                    addDataSource(key, druidDataSource);
+//                    addDataSource(key, druidDataSource);
                     logger.info(dataSourceInfo.getDbCode() + " 动态数据源加载成功");
                 }catch (Exception e){
                     e.printStackTrace();
