@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
@@ -23,30 +23,30 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * master节点数据源配置
- *
+ * cluster节点数据源配置
+ * dataSource = 7
  */
 @Configuration
-@MapperScan(basePackages = {MBMasterDataSourceConfig.PACKAGE},
-        sqlSessionFactoryRef = "masterSqlSessionFactory")
-public class MBMasterDataSourceConfig {
+@MapperScan(basePackages = {MBCluster6DataSourceConfig.PACKAGE},
+        sqlSessionFactoryRef = "cluster6SqlSessionFactory")
+public class MBCluster6DataSourceConfig {
 
-	private static Logger log = LoggerFactory.getLogger(MBMasterDataSourceConfig.class);
-	 
-	static final String PACKAGE = "com.easipass.api.dao.master";
-	    
-    @Value("${spring.datasource.master.masterMapperLocations}")
-    private String masterMapperLocations;
+	private static Logger log = LoggerFactory.getLogger(MBCluster6DataSourceConfig.class);
+	
+	static final String PACKAGE = "com.easipass.api.dao.clusterSix";
+	  
+    @Value("${spring.datasource.cluster6.clusterMapperLocations}")
+    private String clusterMapperLocations;
 
-	@Value("${spring.datasource.master.driverClassName}")
+	@Value("${spring.datasource.cluster6.driverClassName}")
 	private String driverClassName;
-    @Value("${spring.datasource.master.url}")
+    @Value("${spring.datasource.cluster6.url}")
 	private String dbUrl;
-	@Value("${spring.datasource.master.username}")
+	@Value("${spring.datasource.cluster6.username}")
 	private String username;
-	@Value("${spring.datasource.master.password}")
+	@Value("${spring.datasource.cluster6.password}")
 	private String password;
-
+	
 	@Value("${spring.datasource.druid.initialSize}")
 	private int initialSize;
 	@Value("${spring.datasource.druid.minIdle}")
@@ -73,10 +73,9 @@ public class MBMasterDataSourceConfig {
 	private int maxPoolPreparedStatementPerConnectionSize;
 	@Value("{spring.datasource.druidconnectionProperties}")
 	private String connectionProperties;
-//  @ConfigurationProperties(prefix = "spring.datasource.master")
-    @Bean(name = "masterDataSource")
-    @Primary
-    public DataSource masterDataSource() {
+//  @ConfigurationProperties(prefix = "spring.datasource.cluster")
+    @Bean(name = "cluster6DataSource")
+    public DataSource clusterDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         try {
         	 dataSource.setUrl(this.dbUrl);  
@@ -85,31 +84,31 @@ public class MBMasterDataSourceConfig {
              dataSource.setPassword(psw);  
              dataSource.setDriverClassName(driverClassName); 
              dataSource.setFilters("stat,wall,log4j");
-             
- 			dataSource.setInitialSize(initialSize);
- 			dataSource.setMinIdle(minIdle);
- 			dataSource.setMaxActive(maxActive);
- 			dataSource.setMaxWait(maxWait);
- 			dataSource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
- 			dataSource.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
- 			dataSource.setValidationQuery(validationQuery);
- 			dataSource.setTestWhileIdle(testWhileIdle);
- 			dataSource.setTestOnBorrow(testOnBorrow);
- 			dataSource.setTestOnReturn(testOnReturn);
- 			dataSource.setPoolPreparedStatements(poolPreparedStatements);
- 			dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
+            dataSource.setUseGlobalDataSourceStat(true);
+            
+			dataSource.setInitialSize(initialSize);
+			dataSource.setMinIdle(minIdle);
+			dataSource.setMaxActive(maxActive);
+			dataSource.setMaxWait(maxWait);
+			dataSource.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+			dataSource.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
+			dataSource.setValidationQuery(validationQuery);
+			dataSource.setTestWhileIdle(testWhileIdle);
+			dataSource.setTestOnBorrow(testOnBorrow);
+			dataSource.setTestOnReturn(testOnReturn);
+			dataSource.setPoolPreparedStatements(poolPreparedStatements);
+			dataSource.setMaxPoolPreparedStatementPerConnectionSize(maxPoolPreparedStatementPerConnectionSize);
         } catch (SQLException e) {
             //
-        	log.error("druid configuration initialization filter: "+ e);
+        	log.error("druid configuration initialization filter: "+ e);  
         } catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
-        	
 			e.printStackTrace();
-			log.error("druid configuration initialization filter: "+ e);
+			log.error("druid configuration initialization filter: "+ e);  
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			log.error("druid configuration initialization filter: "+ e);
+			log.error("druid configuration initialization filter: "+ e);  
 		}
         return dataSource;
     }
@@ -120,18 +119,18 @@ public class MBMasterDataSourceConfig {
      * @return
      * @throws Exception
      */
-    @Bean(name = "masterSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory masterSqlSessionFactory(
-            @Qualifier("masterDataSource") DataSource dataSource
+    @Bean(name = "cluster6SqlSessionFactory")
+    public SqlSessionFactory clusterSqlSessionFactory(
+            @Qualifier("cluster6DataSource") DataSource dataSource
     ) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        // 配置mapper文件位置
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(masterMapperLocations));
-
+        //配置mapper文件位置
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources(clusterMapperLocations));
+        //Springboot整合Mybatis的CallSettersOnNulls配置问题 当值为空时属性也会没有
+        sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("mybatis-config.xml"));
         //配置分页插件
         PageHelper pageHelper = new PageHelper();
         Properties properties = new Properties();
@@ -143,6 +142,7 @@ public class MBMasterDataSourceConfig {
 
         //设置插件
         sqlSessionFactoryBean.setPlugins(new Interceptor[]{pageHelper});
+        sqlSessionFactoryBean.setConfigurationProperties(properties);
         return sqlSessionFactoryBean.getObject();
     }
 
@@ -151,10 +151,9 @@ public class MBMasterDataSourceConfig {
      *
      * @return
      */
-    @Bean(name = "masterTransactionManager")
-    @Primary
-    public DataSourceTransactionManager masterTransactionManager(
-            @Qualifier("masterDataSource") DataSource dataSource
+    @Bean(name = "cluster6TransactionManager")
+    public DataSourceTransactionManager clusterTransactionManager(
+            @Qualifier("cluster6DataSource") DataSource dataSource
     ) {
         DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager();
         dataSourceTransactionManager.setDataSource(dataSource);
