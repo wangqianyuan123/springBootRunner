@@ -42,7 +42,7 @@ public class HystrixCommandAspect {
     //@Pointcut("execution(public * com.easipass.api.controller.DataConfigureController.*(..))")
     @Pointcut("execution(public * com.victor.controller..*.*(..))")
     public void hystrixPointcut() {
-
+       System.out.println("dev");
         System.out.printf("shuchu");
     }
 
